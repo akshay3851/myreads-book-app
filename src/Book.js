@@ -14,6 +14,7 @@ class Book extends Component {
 	render() {
 
 		const {book, books} = this.props
+        const title = book.title ? book.title : 'No title'
 		
 		// set current shelf to none as default
     	let currentShelf = 'none';
@@ -25,7 +26,8 @@ class Book extends Component {
         		break;
       		}
     	}
-
+        {console.log(title)}
+        {console.log(book)}
 		return (
 			<li>
             	<div className="book">
@@ -48,9 +50,9 @@ class Book extends Component {
                         </div>
                         </div>
                     	<div className="book-title">{book.title}</div>
-                    	{book.authors.map((author) => (
-                    		<div className="book-authors">{author}</div>
-                    	))}                
+                    	{book.authors.length > 0 && (book.authors.map((author,index) => (
+                    		<div className="book-authors" key={index}>{author}</div>
+                    	)))}                
                 </div>
             </li>
 		)

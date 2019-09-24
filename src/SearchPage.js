@@ -1,17 +1,47 @@
 import React, {Component} from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
+import Book from './Book'
 
 class SearchPage extends Component {
-	// static proptypes = {
-	// 	changeShelf: PropTypes.func.isRequired
-	// }
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		changeShelf: PropTypes.func.isRequired
+	}
 
 	state = {
-		query: ''
+		query: '',
+		booksReturned: []
+	}
+
+	searchedBooks = (event) => {
+		const inputValue = event.target.value
+
+		if(inputValue) {
+			this.setState({
+				query: inputValue
+			})
+			BooksAPI.search(inputValue.trim()).then((response) =>this.setState({
+				booksReturned: response
+			}))
+		}else{
+			this.setState({
+				booksReturned: []
+			})
+		}
 	}
 
 	render() {
+		const { query, booksReturned } = this.state
+		const { books, changeShelf } = this.props
+		const hasError = booksReturned.error === "empty query" && query !== ''
+		const hasContent = booksReturned.length > 0
+		const NoQuery = query === ''
+
+		{console.log(query)}
+		{console.log(booksReturned)}
+		{console.log(NoQuery)}
 		return (
 			<div className="search-books">
             	<div className="search-books-bar">
@@ -25,11 +55,29 @@ class SearchPage extends Component {
 		                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 		                  you don't find a specific author or title. Every search is limited by search terms.
 		                */}
-               			<input type="text" placeholder="Search by title or author"/>
+               			<input type="text" placeholder="Search by title or author" onChange={this.searchedBooks} />
             		</div>
             	</div>
             	<div className="search-books-results">
-              		<ol className="books-grid"></ol>
+            	{
+            		hasContent && (
+            			<div>
+            				<h3>Search returned {booksReturned.length} Books</h3>
+            				<ol className="books-grid">
+              					{booksReturned.map(mappedBook => (
+              						<Book 
+              						book={mappedBook} 
+              						books={books} 
+              						changeShelf={changeShelf}
+              						/>
+              					)
+
+              					)}
+              				</ol>
+            			</div>
+            		)
+            	}
+              		
             	</div>
           	</div>
 		)

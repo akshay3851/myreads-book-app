@@ -37,7 +37,7 @@ changeShelf = (bookToUpdate, shelf) => {
     const { books } = this.state
     return (
       <div className="app">
-        <Route path="/search" render={() => <SearchPage />} />            
+        <Route path="/search" render={() => <SearchPage books={books} changeShelf={this.changeShelf} />} />            
         <Route exact path="/" render={() => <BooksPage books={books} changeShelf={this.changeShelf} />} />
       </div>
     )
