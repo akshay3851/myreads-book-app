@@ -22,7 +22,7 @@ class SearchPage extends Component {
 			this.setState({
 				query: inputValue
 			})
-			BooksAPI.search(inputValue.trim()).then((response) =>this.setState({
+			BooksAPI.search(inputValue.trim(), 30).then((response) =>this.setState({
 				booksReturned: response
 			}))
 		}else{
@@ -33,15 +33,9 @@ class SearchPage extends Component {
 	}
 
 	render() {
-		const { query, booksReturned } = this.state
+		const { booksReturned } = this.state
 		const { books, changeShelf } = this.props
-		const hasError = booksReturned.error === "empty query" && query !== ''
 		const hasContent = booksReturned.length > 0
-		const NoQuery = query === ''
-
-		{console.log(query)}
-		{console.log(booksReturned)}
-		{console.log(NoQuery)}
 		return (
 			<div className="search-books">
             	<div className="search-books-bar">
@@ -64,11 +58,12 @@ class SearchPage extends Component {
             			<div>
             				<h3>Search returned {booksReturned.length} Books</h3>
             				<ol className="books-grid">
-              					{booksReturned.map(mappedBook => (
+              					{booksReturned.map((mappedBook,index) => (
               						<Book 
               						book={mappedBook} 
               						books={books} 
               						changeShelf={changeShelf}
+              						key={index}
               						/>
               					)
 

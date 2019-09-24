@@ -3,41 +3,40 @@ import PropTypes from 'prop-types'
 
 class Book extends Component {
 
-	static propTypes = {
-		book: PropTypes.object.isRequired,
-		books: PropTypes.array.isRequired,
-		changeShelf: PropTypes.func.isRequired
-	}
+    static propTypes = {
+        book: PropTypes.object.isRequired,
+        books: PropTypes.array.isRequired,
+        changeShelf: PropTypes.func.isRequired
+    }
 
-	updateShelf = (event) => this.props.changeShelf(this.props.book, event.target.value);
+    updateShelf = (event) => this.props.changeShelf(this.props.book, event.target.value);
 
-	render() {
+    render() {
 
-		const {book, books} = this.props
-        const title = book.title ? book.title : 'No title'
-		
-		// set current shelf to none as default
-    	let currentShelf = 'none';
+        const {book, books} = this.props
+        const title = book.title !== null ? book.title : 'No title'
+        const authorsExist = book.authors !== null      
 
-    	// if book is in current list, set current shelf to book.shelf
-    	for (let item of books) {
-      		if (item.id === book.id) {
-        		currentShelf = item.shelf;
-        		break;
-      		}
-    	}
-        {console.log(title)}
-        {console.log(book)}
-		return (
-			<li>
-            	<div className="book">
-                	<div className="book-top">
+        // set current shelf to none as default
+        let currentShelf = 'none';
+
+        // if book is in current list, set current shelf to book.shelf
+        for (let item of books) {
+            if (item.id === book.id) {
+                currentShelf = item.shelf;
+                break;
+            }
+        }
+        return (
+            <li>
+                <div className="book">
+                    <div className="book-top">
                         <div className="book-cover" style={
-                        	{ 
-                        		width: 128, 
-                        		height: 193,
-                        		backgroundImage: `url(${book.imageLinks.thumbnail})` 
-                        	}}>
+                            { 
+                                width: 128, 
+                                height: 193,
+                                backgroundImage: `url(${book.imageLinks.thumbnail})` 
+                            }}>
                         </div>
                         <div className="book-shelf-changer">
                             <select onChange={this.updateShelf} defaultValue={currentShelf}>
@@ -49,13 +48,11 @@ class Book extends Component {
                             </select>
                         </div>
                         </div>
-                    	<div className="book-title">{book.title}</div>
-                    	{book.authors.length > 0 && (book.authors.map((author,index) => (
-                    		<div className="book-authors" key={index}>{author}</div>
-                    	)))}                
+                        <div className="book-title">{title}</div>
+                        <div className="book-authors" key>{book.authors}</div>             
                 </div>
             </li>
-		)
-	}
+        )
+    }
 }
 export default Book
