@@ -15,7 +15,6 @@ class Book extends Component {
 
         const {book, books} = this.props
         const title = book.title !== null ? book.title : 'No title'
-        const authorsExist = book.authors !== null      
 
         // set current shelf to none as default
         let currentShelf = 'none';
