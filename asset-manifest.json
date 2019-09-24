@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/myreads-book-app/static/css/main.cbda8831.chunk.css",
+    "main.js": "/myreads-book-app/static/js/main.3da9093f.chunk.js",
+    "main.js.map": "/myreads-book-app/static/js/main.3da9093f.chunk.js.map",
+    "runtime-main.js": "/myreads-book-app/static/js/runtime-main.f7644273.js",
+    "runtime-main.js.map": "/myreads-book-app/static/js/runtime-main.f7644273.js.map",
+    "static/js/2.e42dc214.chunk.js": "/myreads-book-app/static/js/2.e42dc214.chunk.js",
+    "static/js/2.e42dc214.chunk.js.map": "/myreads-book-app/static/js/2.e42dc214.chunk.js.map",
+    "index.html": "/myreads-book-app/index.html",
+    "precache-manifest.de7f95e991a156c10504549028b19e7b.js": "/myreads-book-app/precache-manifest.de7f95e991a156c10504549028b19e7b.js",
+    "service-worker.js": "/myreads-book-app/service-worker.js",
+    "static/css/main.cbda8831.chunk.css.map": "/myreads-book-app/static/css/main.cbda8831.chunk.css.map",
+    "static/media/App.css": "/myreads-book-app/static/media/arrow-drop-down.78c6f53b.svg"
+  }
+}
